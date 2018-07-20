@@ -16,6 +16,11 @@ require "capapi/api_resource"
 
 # Named API resources
 require "capapi/case"
+require "capapi/citation"
+require "capapi/court"
+require "capapi/reporter"
+require "capapi/jurisdiction"
+require "capapi/volume"
 
 module Capapi
   @api_base = "https://capapi.org/api"
