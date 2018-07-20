@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    capapi (1.0.0)
+      faraday (~> 0.10)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    faraday (0.15.2)
+      multipart-post (>= 1.2, < 3)
+    multipart-post (2.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  capapi!
+
+BUNDLED WITH
+   1.16.2
