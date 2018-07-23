@@ -104,7 +104,7 @@ module Capapi
       api_base ||= Capapi.api_base
       api_key ||= Capapi.api_key
 
-      # check_api_key!(api_key)
+      check_api_key!(api_key) if api_key
 
       params = Util.objects_to_ids(params)
       url = api_url(path, api_base)
@@ -344,9 +344,10 @@ module Capapi
 
       headers = {
         "User-Agent" => user_agent,
-        "Authorization" => "Token #{api_key}",
-        "Content-Type" => "application/x-www-form-urlencoded",
+        "Content-Type" => "application/x-www-form-urlencoded"
       }
+
+      headers.update("Authorization" => "Token #{api_key}") if api_key
 
       user_agent = @system_profiler.user_agent
       begin
