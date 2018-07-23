@@ -77,7 +77,7 @@ module Capapi
 
     def retrieve(id, opts = {})
       id, retrieve_params = Util.normalize_id(id)
-      resp, opts = request(:get, "#{resource_url}#{CGI.escape(id)}", retrieve_params, opts)
+      resp, opts = request(:get, "#{resource_url}#{id}/", retrieve_params, opts)
       Util.convert_to_capapi_object(resp.results, opts)
     end
 
