@@ -13,6 +13,7 @@ module Capapi
 
     def self.construct_from(values, opts = {})
       values = Capapi::Util.symbolize_names(values)
+      values = transform_values(values)
       
       # work around protected #initialize_from for now
       new(values[:id]).send(:initialize_from, values, opts)
@@ -225,6 +226,11 @@ module Capapi
     end
 
     private
+
+    # Use this to munge data TODO: write better comment
+    def self.transform_values(values)
+      values
+    end
 
     # Produces a deep copy of the given object including support for arrays,
     # hashes, and CapapiObjects.
