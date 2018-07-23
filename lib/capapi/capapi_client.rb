@@ -182,7 +182,7 @@ module Capapi
         raise AuthenticationError, "No API key provided. " \
           'Set your API key using "Capapi.api_key = <API-KEY>". ' \
           "You can generate API keys from the Capapi web interface. " \
-          "See https://capapi.com/api for details, or email support@capapi.com " \
+          "See https://capapi.com/api for details, or email info@capapi.org " \
           "if you have any questions."
       end
 
@@ -191,7 +191,7 @@ module Capapi
       raise AuthenticationError, "Your API key is invalid, as it contains " \
         "whitespace. (HINT: You can double-check your API key from the " \
         "Capapi web interface. See https://capapi.com/api for details, or " \
-        "email support@capapi.com if you have any questions.)"
+        "email info@capapi.org if you have any questions.)"
     end
 
     def execute_request_with_rescues(api_base, context)
@@ -327,11 +327,11 @@ module Capapi
         message = "Could not connect to Capapi (#{api_base}). " \
           "Please check your internet connection and try again. " \
           "If this problem persists, you should check Capapi's service status at " \
-          "https://twitter.com/capapistatus, or let us know at support@capapi.com."
+          "https://twitter.com/capapistatus, or let us know at info@capapi.org."
 
       else
         message = "Unexpected error communicating with Capapi. " \
-          "If this problem persists, let us know at support@capapi.com."
+          "If this problem persists, let us know at info@capapi.org."
 
       end
 
