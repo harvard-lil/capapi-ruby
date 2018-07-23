@@ -75,6 +75,11 @@ module Capapi
       end
     end
 
+    # The API provides urls more often than it provides ids TODO: write better comments
+    def self.extract_id(url)
+      /(?:\/)(\d+)(?:\/)$/.match(url)[1].to_i
+    end
+
     def self.log_error(message, data = {})
       if !Capapi.logger.nil? ||
          !Capapi.log_level.nil? && Capapi.log_level <= Capapi::LEVEL_ERROR
