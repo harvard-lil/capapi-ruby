@@ -5,10 +5,20 @@ module Capapi
     extend Capapi::APIOperations::List
     OBJECT_NAME = "case".freeze
 
-    def casebody
+    def retrieve_casebody(body_format = nil)
       @retrieve_params["full_case"] = true
+      @retrieve_params["body_format"] = body_format if body_format
       refresh
       casebody
+    end
+
+    # This gets overwritten once casebody is loaded
+    def casebody
+      retrieve_casebody
+    end
+
+    def casebody_loaded?
+      @values[:casebody] != nil
     end
 
     private
