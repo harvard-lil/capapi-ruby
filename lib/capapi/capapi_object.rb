@@ -13,7 +13,6 @@ module Capapi
 
     def self.construct_from(values, opts = {})
       values = Capapi::Util.symbolize_names(values)
-      values = transform_values(values)
       
       # work around protected #initialize_from for now
       new(values[:id]).send(:initialize_from, values, opts)
@@ -208,6 +207,7 @@ module Capapi
     #   remove accessors.
     def initialize_from(values, opts, partial = false)
       @opts = Util.normalize_opts(opts)
+      values = transform_values(values)
 
       removed = partial ? Set.new : Set.new(@values.keys - values.keys)
       added = Set.new(values.keys - @values.keys)
@@ -228,7 +228,7 @@ module Capapi
     private
 
     # Use this to munge data TODO: write better comment
-    def self.transform_values(values)
+    def transform_values(values)
       values
     end
 

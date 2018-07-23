@@ -23,7 +23,7 @@ module Capapi
 
     private
 
-    def self.transform_values(values)
+    def transform_values(values)
       values[:reporter] = {id: Util.extract_id(values[:reporter_url]),
                            url: values.delete(:reporter_url),
                            full_name: values.delete(:reporter)}
