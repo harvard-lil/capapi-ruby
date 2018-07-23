@@ -345,7 +345,7 @@ module Capapi
 
       headers = {
         "User-Agent" => user_agent,
-        "Authorization" => "Bearer #{api_key}",
+        "Authorization" => "Token #{api_key}",
         "Content-Type" => "application/x-www-form-urlencoded",
       }
 
