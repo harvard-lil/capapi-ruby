@@ -182,7 +182,7 @@ module Capapi
         raise AuthenticationError, "No API key provided. " \
           'Set your API key using "Capapi.api_key = <API-KEY>". ' \
           "You can generate API keys from the Capapi web interface. " \
-          "See https://capapi.com/api for details, or email info@capapi.org " \
+          "See https://capapi.org for details, or email info@capapi.org " \
           "if you have any questions."
       end
 
@@ -190,7 +190,7 @@ module Capapi
 
       raise AuthenticationError, "Your API key is invalid, as it contains " \
         "whitespace. (HINT: You can double-check your API key from the " \
-        "Capapi web interface. See https://capapi.com/api for details, or " \
+        "Capapi web interface. See https://capapi.org for details, or " \
         "email info@capapi.org if you have any questions.)"
     end
 
@@ -314,20 +314,19 @@ module Capapi
       when Faraday::ConnectionFailed
         message = "Unexpected error communicating when trying to connect to Capapi. " \
           "You may be seeing this message because your DNS is not working. " \
-          "To check, try running 'host capapi.com' from the command line."
+          "To check, try running 'host capapi.org' from the command line."
 
       when Faraday::SSLError
         message = "Could not establish a secure connection to Capapi, you may " \
                   "need to upgrade your OpenSSL version. To check, try running " \
-                  "'openssl s_client -connect api.capapi.com:443' from the " \
+                  "'openssl s_client -connect api.capapi.org:443' from the " \
                   "command line."
 
       when Faraday::TimeoutError
         api_base ||= Capapi.api_base
         message = "Could not connect to Capapi (#{api_base}). " \
           "Please check your internet connection and try again. " \
-          "If this problem persists, you should check Capapi's service status at " \
-          "https://twitter.com/capapistatus, or let us know at info@capapi.org."
+          "If this problem persists, you should let us know at info@capapi.org."
 
       else
         message = "Unexpected error communicating with Capapi. " \
