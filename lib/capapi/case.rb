@@ -24,14 +24,8 @@ module Capapi
     private
 
     def transform_values(values)
-      values[:reporter] = {id: Util.extract_id(values[:reporter_url]),
-                           url: values.delete(:reporter_url),
-                           full_name: values.delete(:reporter)}
-
-      values[:volume] = {barcode: Util.extract_id(values[:volume_url]),
-                         url: values.delete(:volume_url),
-                         volume_number: values.delete(:volume_number)}
-
+      values[:reporter][:id] = Util.extract_id(values[:reporter][:url])
+      values[:volume][:barcode] = Util.extract_id(values[:volume][:url])
       values
     end
   end
