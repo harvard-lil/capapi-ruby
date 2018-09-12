@@ -52,7 +52,7 @@ module Capapi
                object_name :
                  (k == :results ?
                     nested_object_name :
-                    k.to_s.singularize)
+                    Util.singularize(k.to_s))
         @values[k] = Util.convert_to_capapi_object(v, opts, name)
       end
     end
@@ -154,7 +154,7 @@ module Capapi
                 "We interpret empty strings as nil in requests. " \
                 "You may set (object).#{k} = nil to delete the property."
             end
-            @values[k] = Util.convert_to_capapi_object(v, @opts, k.to_s.singularize)
+            @values[k] = Util.convert_to_capapi_object(v, @opts, Util.singularize(k.to_s))
           end
 
           if [FalseClass, TrueClass].include?(values[k].class)
