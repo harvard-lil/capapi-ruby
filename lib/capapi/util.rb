@@ -180,7 +180,6 @@ module Capapi
         if value.is_a?(Hash)
           result += flatten_params(value, calculated_key)
         elsif value.is_a?(Array)
-          check_array_of_maps_start_keys!(value)
           result += flatten_params_array(value, calculated_key)
         else
           result << [calculated_key, value]
@@ -192,13 +191,13 @@ module Capapi
 
     def self.flatten_params_array(value, calculated_key)
       result = []
-      value.each do |elem|
+      value.each_with_index do |elem, i|
         if elem.is_a?(Hash)
-          result += flatten_params(elem, "#{calculated_key}[]")
+          result += flatten_params(elem, "#{calculated_key}[#{i}]")
         elsif elem.is_a?(Array)
           result += flatten_params_array(elem, calculated_key)
         else
-          result << ["#{calculated_key}[]", elem]
+          result << ["#{calculated_key}[#{i}]", elem]
         end
       end
       result
@@ -221,7 +220,6 @@ module Capapi
       when String
         { api_key: opts }
       when Hash
-        # check_api_key!(opts.fetch(:api_key)) if opts.key?(:api_key)
         opts.clone
       else
         raise TypeError, "normalize_opts expects a string or a hash"
@@ -265,6 +263,11 @@ module Capapi
       res = 0
       b.each_byte { |byte| res |= byte ^ l.shift }
       res.zero?
+    end
+
+    # This is intentially bare-bones; fits our intended usecases
+    def self.singularize(s)
+      s[/(.*)s/, 1]
     end
 
     #
@@ -351,7 +354,7 @@ module Capapi
     def self.log_internal(message, data = {}, color: nil, level: nil, logger: nil, out: nil)
       data_str = data.reject { |_k, v| v.nil? }
                      .map do |(k, v)|
-        format("%s=%s", colorize(k, color, !out.nil? && out.isatty), wrap_logfmt_value(v))
+        format("%s=%s", colorize(k, color, logger.nil? && !out.nil? && out.isatty), wrap_logfmt_value(v))
       end.join(" ")
 
       if !logger.nil?
